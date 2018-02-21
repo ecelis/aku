@@ -1,5 +1,9 @@
 #!/bin/bash
 
+## Author: Hernando Ramos <aku@esblender.org>
+
+
+. ./settings.conf
 
 echo "
 
@@ -25,7 +29,9 @@ echo ">   >>   >>>   >>>>   >>>>>   >>>>>>   searching..."
 
 #       Extraer lineas de texto con el string buscado. La segunda opción funciona para coincidencias parciales en palabras
 #grep -rnwi /Users/nando/Desktop/INDEXADO/ -e ""
-grep -ri /Volumes/NANDO_SCRATCH/INDEXADO/ -e ""
+for vol in $REL_PATHS; do
+  grep -ri ${BASE_PATH}/${vol} -e ""
+done
 
 #       quitar información inecesaria con sed
 
@@ -40,7 +46,7 @@ grep -ri /Volumes/NANDO_SCRATCH/INDEXADO/ -e ""
 
 echo "/// /// /// /// /// /// /// /// /// /// /// /// /// /// /// ///"
 
-echo "Fin de la busqueda"
+echo "The End"
 
 echo "/// /// /// /// /// /// /// /// /// /// /// /// /// /// /// ///"
 
