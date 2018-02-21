@@ -25,30 +25,21 @@ echo "What are you looking for?"
 
 read varsearch
 
-echo ">   >>   >>>   >>>>   >>>>>   >>>>>>   searching..."
+echo -e ">   >>   >>>   >>>>   >>>>>   >>>>>>   searching...\n"
 
 #       Extraer lineas de texto con el string buscado. La segunda opción funciona para coincidencias parciales en palabras
 #grep -rnwi /Users/nando/Desktop/INDEXADO/ -e ""
 for vol in $REL_PATHS; do
-  grep -ri ${BASE_PATH}/${vol} -e ""
+  idxfile=$(find ${BASE_PATH}${vol} -name "index_${vol}.idx")
+  grepout=$(grep -ri ${idxfile} -e "${varsearch}")
+  echo -e $grepout
 done
 
-#       quitar información inecesaria con sed
+echo -e "/// /// /// /// /// /// /// /// /// /// /// /// /// /// /// ///"
 
-#sed "/Volumes/NANDO_SCRATCH/INDEXADO/Lista_archivos en capturas.txt:/"
-#sed '/Volumes/NANDO_SCRATCH/INDEXADO/Lista_archivos_Osito.txt;/'
-#sed '/Volumes/NANDO_SCRATCH/INDEXADO/Lista_de_archivos_Osito.txt:/'
-#sed '/Volumes/NANDO_SCRATCH/INDEXADO/Lista_archivos_NANDO.txt:/'
-#sed '/Volumes/NANDO_SCRATCH/INDEXADO/Lista_de_archivos_Luis.txt:/'
+echo -e "The End"
 
-
-#       Saludo final
-
-echo "/// /// /// /// /// /// /// /// /// /// /// /// /// /// /// ///"
-
-echo "The End"
-
-echo "/// /// /// /// /// /// /// /// /// /// /// /// /// /// /// ///"
+echo -e "/// /// /// /// /// /// /// /// /// /// /// /// /// /// /// ///\n"
 
 #
 # Hace tiempo trate de encontrara la manera de que en cada string que regresa la busqueda me pusiera un hyperlink a la carpeta correspondiente pero no e encontrado la manera. También quisiera poner algo que hiciera que haga menos verboso la salida de search.sh, pues ahora es mas a menos así:
