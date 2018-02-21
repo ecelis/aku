@@ -17,11 +17,11 @@ echo "
 
 /// /// /// /// /// /// /// /// /// /// /// /// /// /// /// ///"
 
-echo "¿Que estamos buscando?"
+echo "What are you looking for?"
 
 read varsearch
 
-echo ">   >>   >>>   >>>>   >>>>>   >>>>>>   buscando ..."
+echo ">   >>   >>>   >>>>   >>>>>   >>>>>>   searching..."
 
 #       Extraer lineas de texto con el string buscado. La segunda opción funciona para coincidencias parciales en palabras
 #grep -rnwi /Users/nando/Desktop/INDEXADO/ -e ""
