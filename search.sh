@@ -54,32 +54,34 @@ echo -e ">   >>   >>>   >>>>   >>>>>   >>>>>>   searching...\n"
 #grep -rnwi /Users/nando/Desktop/INDEXADO/ -e ""
 for vol in $REL_PATHS; do
   idxfile=$(find ${BASE_PATH}${vol} -name "index_${vol}.idx")
-  grepout=$(grep -ri ${idxfile} -e "${varsearch}")
-  echo -e $grepout
+  grepout=$(grep -rni ${idxfile} -e "${varsearch}")
+  for match in ${grepout}; do
+    echo $match
+  done
 done
 echo -e "/// /// /// /// /// /// /// /// /// /// /// /// /// /// /// ///"
 echo -e "The End"
 echo -e "/// /// /// /// /// /// /// /// /// /// /// /// /// /// /// ///\n"
 
-while :
-do
-  clear
-  #options=("1 ${}")
-  select $opt in "${grepout[@]}"
-  do
-    case $opt in
-      "1 ${opts[1]}")
-        choice 1
-        break
-        ;;
-      "2 ${opts[2]}")
-        choice 2
-        break
-        ;;
-      "Done")
-        break 2
-        ;;
-      *) printf '%s\n' 'Invalid option';;
-    esac
-  done
-done
+#while :
+#do
+#  clear
+#  #options=("1 ${}")
+#  select $opt in "${grepout[@]}"
+#  do
+#    case $opt in
+#      "1 ${opts[1]}")
+#        choice 1
+#        break
+#        ;;
+#      "2 ${opts[2]}")
+#        choice 2
+#        break
+#        ;;
+#      "Done")
+#        break 2
+#        ;;
+#      *) printf '%s\n' 'Invalid option';;
+#    esac
+#  done
+#done
