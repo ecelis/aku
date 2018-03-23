@@ -5,9 +5,9 @@
 ## https://serverfault.com/questions/144939/multi-select-menu-in-bash-script
 ## 2013-05-10 - Dennis Williamson
 
-OS=$(uname)
+OS="$(uname)"
 
-if [ ${OS} = "Darwin" ];
+if [ "${OS}" = "Darwin" ];
 then
   OPENCMD="open"
 else
@@ -17,8 +17,8 @@ fi
 . ./settings.conf
 
 choice () {
-  local choice=$1
-  if [[ ${opts[choice]} ]]
+  local choice="${1}"
+  if [[ "${opts[choice]}" ]]
   then
     opts[choice]=
   else
@@ -27,24 +27,15 @@ choice () {
 }
 
 
-akubanner () {
+doBanner () {
   echo "
-  /// /// /// /// /// /// /// /// /// /// /// /// /// /// /// ///
-
-  ╦ ╦╔═╗╦═╗╔╗╔╔═╗╔╗╔╔╦╗╔═╗
-  ╠═╣║╣ ╠╦╝║║║╠═╣║║║ ║║║ ║
-  ╩ ╩╚═╝╩╚═╝╚╝╩ ╩╝╚╝═╩╝╚═╝
-  ╔═╗╔═╗╔═╗╦═╗╔═╗╦ ╦
-  ╚═╗║╣ ╠═╣╠╦╝║  ╠═╣
-  ╚═╝╚═╝╩ ╩╩╚═╚═╝╩ ╩
-  ╔═╗╔╗╔╔═╗╦╔╗╔╔═╗
-  ║╣ ║║║║ ╦║║║║║╣
-  ╚═╝╝╚╝╚═╝╩╝╚╝╚═╝
-
-  /// /// /// /// /// /// /// /// /// /// /// /// /// /// /// ///"
+########################################################################
+                           Aku Search Engine
+                           on: "${OS}"
+########################################################################"
 }
 
-akubanner
+doBanner
 echo "What are you looking for?"
 
 read varsearch
@@ -52,16 +43,21 @@ read varsearch
 echo -e ">   >>   >>>   >>>>   >>>>>   >>>>>>   searching...\n"
 #       Extraer lineas de texto con el string buscado. La segunda opción funciona para coincidencias parciales en palabras
 #grep -rnwi /Users/nando/Desktop/INDEXADO/ -e ""
-for vol in $REL_PATHS; do
-  idxfile=$(find ${BASE_PATH}${vol} -name "index_${vol}.idx")
-  grepout=$(grep -rni ${idxfile} -e "${varsearch}")
-  for match in ${grepout}; do
-    echo $match
-  done
+IFS=" "
+for vol in ${REL_PATHS}; do
+  idxfile=$(find "${BASE_PATH}${vol}" -name "index_${vol}.idx")
+  #echo "${idxfile}"
+  #echo "${idxfile} ${varsearch}"
+  grepout=$(grep -ri "${idxfile}" -e "${varsearch}")
+  echo -e "file://${grepout}"
+#  for match in "${grepout}"; do
+#    echo "file:///${match}"
+#  done
+IFS=""
 done
-echo -e "/// /// /// /// /// /// /// /// /// /// /// /// /// /// /// ///"
-echo -e "The End"
-echo -e "/// /// /// /// /// /// /// /// /// /// /// /// /// /// /// ///\n"
+echo -e "########################################################################"
+echo -e "                           The End"
+echo -e "########################################################################"
 
 #while :
 #do
@@ -85,3 +81,4 @@ echo -e "/// /// /// /// /// /// /// /// /// /// /// /// /// /// /// ///\n"
 #    esac
 #  done
 #done
+
